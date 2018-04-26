@@ -6,3 +6,6 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl  
 import math
 
+df = pd.read_csv('dataset/segmentation.test')
+
+print(df)
