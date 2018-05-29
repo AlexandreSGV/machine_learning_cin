@@ -5,9 +5,9 @@ import codigo_modulado as code
 import time
 from sklearn.naive_bayes import GaussianNB
 
-nb =  GaussianNB()
+gnb =  GaussianNB()
 
-dados = pd.read_csv('image_segmentation.csv', sep=';')
+dados = pd.read_csv('image_segmentation_18_2098.csv', sep=';')
 wNames = dados.CLASSE.unique()
 print (wNames)
 
@@ -21,8 +21,9 @@ df_teste = dados.drop(df_treinamento.index).iloc[:, 1:].values
 
 
 
-# nb.fit(df_)
 
+
+teste = []
 w = {}
 wCount = {}
 prioridadesPriori  = {}
@@ -36,7 +37,10 @@ for name in wNames:
     # calcula paramentros
     mis[name] = calcula_mi(w[name])
     sigmas[name] = calcula_sigma(w[name],mis[name])
-    
+
+
+
+
 for xk in df_teste:
     print("#################")
     for name in w.keys():
