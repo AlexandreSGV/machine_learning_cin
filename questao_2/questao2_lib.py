@@ -2,7 +2,7 @@
 import numpy as np
 import bigfloat
 
-
+# grupo em que se quer calcular a média
 def calcula_mi(X):
    
     # print('X.shape', X.shape)
@@ -15,11 +15,12 @@ def calcula_mi(X):
     # print('mi', soma)
 
     return soma
-
+# X é vetor com elementos do grupo (shape NxD)
+# mi é média dos elementos do grupo
 def calcula_sigma(X, mi):
     # print('X.shape', X.shape)
     
-    soma = 0
+    soma = np.zeros((X.shape[1],X.shape[1]))
     n = len(X)
 
     for i in range(n):
@@ -33,9 +34,13 @@ def calcula_sigma(X, mi):
         # soma += np.dot( ( X[i].reshape(1, len(X[i])) - X[i].reshape(1,len(X[i])) ) ,  (mi.reshape(len(mi),1) - mi.reshape(1,len(mi)) ) )
         soma += np.dot(diff,diffT)
     soma /= n
+    
+    soma = soma * np.identity(soma.shape[1])
+    
+    # print(soma.diagonal())
     # este determinante da inversa não pode ser negativo, mas alguns det da inversa dão negativo.
     # dessa forma não se pode elevar sigma a 1/2 no cálculo da probabilidade a posteriori. 
-    print('calcula_sigma.det da inv ', np.linalg.det(np.linalg.pinv(soma)))
+    # print('calcula_sigma.det da inv ', np.linalg.det(np.linalg.pinv(soma)))
     return soma
     
 
@@ -53,7 +58,8 @@ def calcula_posteriori(xk, mi, sigma):
     # if(np.linalg.det(sigma) != 0.0):
     # sigma = np.array(sigma, dtype=np.float128)
     # print('np.linalg.det( np.linalg.inv(sigma) ) ', np.linalg.det( np.linalg.pinv(sigma)))
-    determinante = ((2 * np.pi)**(-d/2)) * (np.linalg.det( np.linalg.pinv(sigma)) ** 0.5) 
+    pi = ((2 * np.pi)**(-d/2))
+    determinante =  (np.linalg.det( np.linalg.pinv(sigma)) ** 0.5) 
     
 
 
@@ -94,7 +100,7 @@ def calcula_posteriori(xk, mi, sigma):
 
     # print('exponencial',exponencial)
     # print(1/0)
-    return determinante * exponencial
+    return pi*determinante * exponencial
 
 # falta testar
 def calcula_bayesianoGaussiano(xk, wName,prioridadesPriori,mis,sigmas):
@@ -111,3 +117,7 @@ def calcula_bayesianoGaussiano(xk, wName,prioridadesPriori,mis,sigmas):
         parte2 += calcula_posteriori(xk,mis[name],sigmas[name]) *  prioridadesPriori[name]
     
     return parte1 / parte2
+
+
+
+
