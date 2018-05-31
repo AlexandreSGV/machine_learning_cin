@@ -23,8 +23,8 @@ def calculatePrior(train_set, numberOfClasses):
         #compute prior
         prior = class_sample_size / float(train_sample_size)
         prior_.append(prior)
-    
-    return prior_ 
+
+    return prior_
 
 def regularization_function(h, x, x_i):
     return (x_i - x) / float(h)
@@ -37,11 +37,17 @@ def gaussian_window_func(conjunto_treinamento, elemento_teste, h):
     k = np.sum(prod_sample)
     return k
 
+
+# kernel estimator
+# conjunto_treinamento = training samples
+# elemento_teste = test sample
+# h = bandwidth
+# d = number of dimensions
 def estimador_parzen(conjunto_treinamento, elemento_teste, h):
     n = conjunto_treinamento.shape[0]
     v = h ** conjunto_treinamento.shape[1]
     k = gaussian_window_func(conjunto_treinamento, elemento_teste, h)
-    
+
     density = (1/float(n)) * (1/float(v)) * float(k)
 
     #print("k", k)
@@ -50,7 +56,7 @@ def estimador_parzen(conjunto_treinamento, elemento_teste, h):
     #print("density", density)
 
     return density
-    
+
 # naive bayes
 #  calculate evidence from all sample likelihoods
 def calcular_evidencia(likelihoods, priors):
@@ -64,7 +70,7 @@ def calcula_posteriori(priori, densidade, evidencia):
 
 def predict(conjunto_treinamento, numeroClasses, elemento_teste, h, priori):
     size = int(conjunto_treinamento.shape[0] / numeroClasses)
-    
+
     densidades = []
     for w in range(0, numeroClasses):
         # limits for training samples from class
@@ -78,13 +84,13 @@ def predict(conjunto_treinamento, numeroClasses, elemento_teste, h, priori):
         # calculates density through parzen window estimation with gaussian kernel
         densidade = estimador_parzen(train_samples, elemento_teste, h)
         densidades.append(densidade)
-    
+
     # print('densidades', densidades)
 
     densidades = np.array(densidades)
 
     # calculate the evidence
-    
+
     evidencia = calcular_evidencia(densidades, priori)
     # print('evidencia', evidencia)
 
@@ -96,7 +102,7 @@ def predict(conjunto_treinamento, numeroClasses, elemento_teste, h, priori):
         posteriors.append(posterior)
         # print("prior", prior_[w], "density", densities[w], "evidence", evidence)
         # print("w", w, "posterior", posterior)
-    
+
     # print("posteriors", posteriors)
     # print('maximum', np.argmax(posteriors))
     return np.argmax(posteriors)
@@ -107,3 +113,11 @@ def generateTargets(numberOfClasses, patternSpace):
         target_train.append([i] * patternSpace)
 
     return np.hstack(target_train)
+
+
+def confusionMatrix(repetitions_predictions):
+    matrix = np.zeros((7, 7))
+    for predictions in repetitions_predictions:
+        for prediction in predictions:
+            matrix[prediction[0], prediction[1]] += 1
+    return matrix
