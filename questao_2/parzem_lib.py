@@ -12,7 +12,7 @@ def estimador_bandwidth(data):
 # calculate prior for classes
 def calculatePrior(train_set, numberOfClasses):
     prior_ = []
-
+    # print(train_set)
     # iterates through class training samples
     for w in range(0, numberOfClasses):
 
@@ -100,3 +100,10 @@ def predict(conjunto_treinamento, numeroClasses, elemento_teste, h, priori):
     # print("posteriors", posteriors)
     # print('maximum', np.argmax(posteriors))
     return np.argmax(posteriors)
+
+def generateTargets(numberOfClasses, patternSpace):
+    target_train = []
+    for i in range(0, numberOfClasses):
+        target_train.append([i] * patternSpace)
+
+    return np.hstack(target_train)
