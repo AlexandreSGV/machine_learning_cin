@@ -1,6 +1,6 @@
 import operator
 import pandas as pd
-from questao2_lib import *
+from gaussian_lib import *
 import numpy as np
 import codigo_modulado as code
 import time
