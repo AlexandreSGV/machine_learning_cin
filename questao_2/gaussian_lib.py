@@ -1,13 +1,13 @@
-
 import numpy as np
 import bigfloat
 
-# grupo em que se quer calcular a média
+# X grupo em que se quer calcular a média
 def calcula_mi(X):
-   
-    # print('X.shape', X.shape)
+    X = np.array(X)
+    # print('X', X)
     soma = np.zeros(X.shape[1])
-    
+
+
     for i in range(len(X)):
         # print('X[i]', X[i])
         soma += X[i]
@@ -19,7 +19,7 @@ def calcula_mi(X):
 # mi é média dos elementos do grupo
 def calcula_sigma(X, mi):
     # print('X.shape', X.shape)
-    
+    X = np.array(X)
     soma = np.zeros((X.shape[1],X.shape[1]))
     n = len(X)
 
@@ -34,15 +34,15 @@ def calcula_sigma(X, mi):
         # soma += np.dot( ( X[i].reshape(1, len(X[i])) - X[i].reshape(1,len(X[i])) ) ,  (mi.reshape(len(mi),1) - mi.reshape(1,len(mi)) ) )
         soma += np.dot(diff,diffT)
     soma /= n
-    
+
     soma = soma * np.identity(soma.shape[1])
-    
+
     # print(soma.diagonal())
     # este determinante da inversa não pode ser negativo, mas alguns det da inversa dão negativo.
-    # dessa forma não se pode elevar sigma a 1/2 no cálculo da probabilidade a posteriori. 
+    # dessa forma não se pode elevar sigma a 1/2 no cálculo da probabilidade a posteriori.
     # print('calcula_sigma.det da inv ', np.linalg.det(np.linalg.pinv(soma)))
     return soma
-    
+
 
 
 def calcula_posteriori(xk, mi, sigma):
@@ -52,22 +52,22 @@ def calcula_posteriori(xk, mi, sigma):
     # print('mi',mi)
     # print('sigma shape',sigma.shape,sigma)
     # print('sigma ', sigma)
-    
+
     # inversa = np.linalg.inv(sigma)
     # determinante = 0.0
     # if(np.linalg.det(sigma) != 0.0):
     # sigma = np.array(sigma, dtype=np.float128)
     # print('np.linalg.det( np.linalg.inv(sigma) ) ', np.linalg.det( np.linalg.pinv(sigma)))
     pi = ((2 * np.pi)**(-d/2))
-    determinante =  (np.linalg.det( np.linalg.pinv(sigma)) ** 0.5) 
-    
+    determinante =  (np.linalg.det( np.linalg.pinv(sigma)) ** 0.5)
+
 
 
     # determinante2 = ((2 * np.pi)**(-d/2)) * ( np.asarray(np.linalg.det( np.linalg.pinv(sigma)),dtype=np.float64) ** (0.5) )
     # print('determinante ' , determinante)
 
     # determinant =  (ownpow(np.linalg.det( np.linalg.pinv(sigma)) , 0.5))
-    # print(' - - - - - - -') 
+    # print(' - - - - - - -')
     # print('np.linalg.det ' , np.linalg.det( np.linalg.pinv(sigma)))
     # print('type ' , type(np.linalg.det( np.linalg.pinv(sigma))))
     # print('determinant ' , determinant)
@@ -92,7 +92,7 @@ def calcula_posteriori(xk, mi, sigma):
 
     mult1 = np.dot(parte2,parte1)
     # print('mult1.shape',mult1.shape)
-    
+
     mult2 = np.dot(parte3, mult1)
     # print('mult2.shape',mult2.shape)
 
@@ -115,9 +115,5 @@ def calcula_bayesianoGaussiano(xk, wName,prioridadesPriori,mis,sigmas):
     parte2 = 0
     for name in mis.keys():
         parte2 += calcula_posteriori(xk,mis[name],sigmas[name]) *  prioridadesPriori[name]
-    
+
     return parte1 / parte2
-
-
-
-
