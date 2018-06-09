@@ -9,7 +9,8 @@ from sklearn.model_selection import RepeatedStratifiedKFold
 
 
 # gnb =  GaussianNB()
-repeticoes = 30
+repeticoes = 2
+splits = 5
 
 
 df = pd.read_csv('image_segmentation.csv', sep=';')
@@ -20,9 +21,14 @@ print (wNames)
 dados = df.iloc[:, 1:].values
 classes = df.CLASSE.values
 rskf = RepeatedStratifiedKFold(
-    n_splits=10, n_repeats=repeticoes, random_state=123456789)
-
+    n_splits=splits, n_repeats=repeticoes, random_state=123456789)
+cont = 0
+acertos = 0
+erros = 0
+acuracias = []
 for indices_treinamento, indices_teste in rskf.split(dados, classes):
+    cont += 1
+    print('cont ', cont)
     conj_treinamento = {}
     conj_teste = dados[indices_teste]
     gabarito_conj_teste = classes[indices_teste]
@@ -33,7 +39,7 @@ for indices_treinamento, indices_teste in rskf.split(dados, classes):
 
     for i in indices_treinamento:
         conj_treinamento[classes[i]].append( dados[i])
-        
+
 
     qtdClasses = {}
     probabilidadesPriori  = {}
@@ -55,19 +61,26 @@ for indices_treinamento, indices_teste in rskf.split(dados, classes):
 
         estimativas.append(max(probabilidades.keys(), key=(lambda k: probabilidades[k])))
 
-    acertos = 0
-    erros = 0
+
+
     for i in range(len(gabarito_conj_teste)):
         # print(gabarito_conj_teste[i], ' - ', estimativas[i], ' - ', gabarito_conj_teste[i] == estimativas[i])
         if (gabarito_conj_teste[i] == estimativas[i]):
             acertos +=1
         else:
             erros +=1
+    if (cont % splits == 0):
+        # print('Repetição ', int(cont / splits))
+        # print('Tamanho conjunto de testes : ', acertos+erros)
+        # print('acertos : ', acertos)
+        # print('erros : ', erros)
+        # print('acurácia : ', acertos / (acertos + erros))
+        acuracias.append(acertos / (acertos + erros))
+        acertos = 0
+        erros = 0
 
-    print('Tamanho conjunto de testes : ', acertos+erros)
-    print('acertos : ', acertos)
-    print('erros : ', erros)
-    print('acurácia : ', acertos / len(gabarito_conj_teste))
+for indice, a in enumerate(acuracias):
+    print(indice,':', a)
 
 
 
@@ -76,7 +89,8 @@ for indices_treinamento, indices_teste in rskf.split(dados, classes):
 
 
 
-    
+
+
     # print('conj treinamento', conj_treinamento)
     # for name in wNames :
     #     print('name', name)
