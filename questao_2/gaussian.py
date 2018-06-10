@@ -8,7 +8,6 @@ import time
 from sklearn.model_selection import RepeatedStratifiedKFold
 
 startTotalTime = time.time()
-# gnb =  GaussianNB()
 repeticoes = 30
 splits = 10
 
@@ -17,7 +16,7 @@ df = pd.read_csv('segmentation_18_col.csv', sep=',')
 nomeClasses = df.CLASSE.unique()
 print (nomeClasses)
 
-classes = df.CLASSE.values
+gabarito = df.CLASSE.values
 
 
 
@@ -25,7 +24,7 @@ classes = df.CLASSE.values
 startCompleteViewTime = time.time()
 print('CompleteView ####################')
 dadosCompleteView = df.iloc[:, 1:].values
-acuracias = executaGaussiana(dadosCompleteView, classes,
+acuracias = executaGaussiana(dadosCompleteView, gabarito,
                              nomeClasses, repeticoes, splits)
 for indice, a in enumerate(acuracias):
     print(indice, ': %.5f' % (a))
@@ -35,7 +34,7 @@ endCompleteViewTime = time.time()
 startShapeViewTime = time.time()
 print('ShapeView ####################')
 dadosShapeView = df.iloc[:, 1:9].values
-acuracias = executaGaussiana(dadosShapeView, classes, nomeClasses, repeticoes,
+acuracias = executaGaussiana(dadosShapeView, gabarito, nomeClasses, repeticoes,
                              splits)
 for indice, a in enumerate(acuracias):
     print(indice, ': %.5f' %(a) )
@@ -45,7 +44,7 @@ endShapeViewTime = time.time()
 startRGBViewTime = time.time()
 print('RGBView ####################')
 dadosRGBView = df.iloc[:, 9:19].values
-acuracias = executaGaussiana(dadosRGBView, classes, nomeClasses,
+acuracias = executaGaussiana(dadosRGBView, gabarito, nomeClasses,
                              repeticoes, splits)
 for indice, a in enumerate(acuracias):
     print(indice, ': %.5f' % (a))
@@ -68,18 +67,18 @@ print("Total        : %.2f segundos" % (endTotalTime - startTotalTime))
 # acertos = 0
 # erros = 0
 # acuracias = []
-# for indices_treinamento, indices_teste in rskf.split(dados, classes):
+# for indices_treinamento, indices_teste in rskf.split(dados, gabarito):
 #     cont += 1
 #     print('cont ', cont)
 #     conj_treinamento = {}
 #     conj_teste = dados[indices_teste]
-#     gabarito_conj_teste = classes[indices_teste]
+#     gabarito_conj_teste = gabarito[indices_teste]
 
 #     for name in nomeClasses :
 #         conj_treinamento[name] = []
 
 #     for i in indices_treinamento:
-#         conj_treinamento[classes[i]].append( dados[i])
+#         conj_treinamento[gabarito[i]].append( dados[i])
 
 #     qtdClasses = {}
 #     probabilidadesPriori  = {}
@@ -207,8 +206,8 @@ print("Total        : %.2f segundos" % (endTotalTime - startTotalTime))
 
 # Código compara sigmas da GaussianNB e dos feitos pela fórmula do projeto
 # teste = df_treinamento.iloc[:, 1:].values
-# classes = df_treinamento['CLASSE'].values
-# gnb.fit(teste, classes)
+# gabarito = df_treinamento['CLASSE'].values
+# gnb.fit(teste, gabarito)
 
 # for i in range(7):
 #     print(np.linalg.det(np.linalg.pinv( np.identity(18) *gnb.sigma_[i])))

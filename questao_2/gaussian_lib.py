@@ -79,7 +79,7 @@ def calcula_bayesianoGaussiano(xk, wName,prioridadesPriori,mis,sigmas):
 
     return parte1 / parte2
 
-def executaGaussiana(dados, classes, nomeClasses, repeticoes, splits):
+def executaGaussiana(dados, gabarito, nomeClasses, repeticoes, splits):
 
     rskf = RepeatedStratifiedKFold(
         n_splits=splits, n_repeats=repeticoes, random_state=123456789)
@@ -89,18 +89,18 @@ def executaGaussiana(dados, classes, nomeClasses, repeticoes, splits):
     acertos = 0
     erros = 0
     acuracias = []
-    for indices_treinamento, indices_teste in rskf.split(dados, classes):
+    for indices_treinamento, indices_teste in rskf.split(dados, gabarito):
         cont += 1
         print('cont ', cont)
         conj_treinamento = {}
         conj_teste = dados[indices_teste]
-        gabarito_conj_teste = classes[indices_teste]
+        gabarito_conj_teste = gabarito[indices_teste]
 
         for name in nomeClasses:
             conj_treinamento[name] = []
 
         for i in indices_treinamento:
-            conj_treinamento[classes[i]].append(dados[i])
+            conj_treinamento[gabarito[i]].append(dados[i])
 
         qtdClasses = {}
         probabilidadesPriori = {}

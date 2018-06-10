@@ -1,6 +1,7 @@
 import numpy as np
 from sklearn.neighbors.kde import KernelDensity
 from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import RepeatedStratifiedKFold
 
 
 def estimador_bandwidth(data):
@@ -115,9 +116,99 @@ def generateTargets(numberOfClasses, patternSpace):
     return np.hstack(target_train)
 
 
-def confusionMatrix(repetitions_predictions):
+def calculateConfusionMatrix(repetitions_predictions):
     matrix = np.zeros((7, 7))
     for predictions in repetitions_predictions:
         for prediction in predictions:
             matrix[prediction[0], prediction[1]] += 1
     return matrix
+
+
+def executaParzen(dados, gabarito, nomeClasses, repeticoes, splits,
+                  elementsByClass):
+
+
+    numeroClasses = len(nomeClasses)
+    target = generateTargets(len(nomeClasses), elementsByClass)
+
+
+    rskf = RepeatedStratifiedKFold(
+        n_splits=splits, n_repeats=repeticoes, random_state=123456789)
+
+    # h = estimador_bandwidth(dados)
+    # print('bandwidth: ', h)
+    h = 6.98947320727
+    cont = 0
+    acertos = 0
+    erros = 0
+    acuracias = []
+
+    predictions = []
+    error_rates = []
+    # print('target', target)
+    for indices_treinamento, indices_teste in rskf.split(dados, target):
+        cont += 1
+        print('cont ', cont)
+        conjunto_treinamento = dados[indices_treinamento]
+        # print(conjunto_treinamento[ : , 1: ]) # sem a coluna da classe
+        # print(conjunto_treinamento[ : , :1 ]) #somente a coluna da classe
+
+        # conjunto_teste = dados[indices_teste][ : , 1: ]
+        # gabarito_teste = dados[indices_teste][ : , :1 ]
+        conjunto_teste = dados[indices_teste]
+        gabarito_teste = target[indices_teste]
+
+        # print(conjunto_treinamento)
+        # print(conjunto_teste.shape)
+        # print(gabarito_teste.shape)
+
+        priori = calculatePrior(conjunto_treinamento, numeroClasses)
+        # c = 0
+        errors = 0
+        hits = 0
+        repetition_predictions = []
+        estimativas = []
+        # para cada elemento do treinamento, calcula a densidade
+        for indice, elemento_teste in enumerate(conjunto_teste):
+            classe_correta = gabarito_teste[indice]
+
+            predicted_class = predict(conjunto_treinamento, numeroClasses,
+                                    elemento_teste, h, priori)
+
+            # usado para gerar matriz de confusao
+            prediction = []
+            prediction.append(classe_correta)
+            prediction.append(predicted_class)
+            repetition_predictions.append(prediction)
+            if (predicted_class == classe_correta):
+                hits += 1
+            else:
+                errors += 1
+
+            # usado para gerar tabela de acusária de 1 a N Repetions
+            estimativas.append(predicted_class)
+
+
+        error_rate = errors / (hits + errors)
+
+        error_rates.append(error_rate)
+        predictions.append(repetition_predictions)
+        for i in range(len(gabarito_teste)):
+            # print(gabarito_teste[i], ' - ', estimativas[i], ' - ',
+                #   gabarito_teste[i] == estimativas[i])
+            if (gabarito_teste[i] == estimativas[i]):
+                acertos += 1
+            else:
+                erros += 1
+        if (cont % splits == 0):
+            # print('Repetição ', int(cont / splits))
+            # print('Tamanho conjunto de testes : ', acertos+erros)
+            # print('acertos : ', acertos)
+            # print('erros : ', erros)
+            # print('acurácia : ', acertos / (acertos + erros))
+            acuracias.append(acertos / (acertos + erros))
+            acertos = 0
+            erros = 0
+
+
+    return predictions, error_rates, acuracias
