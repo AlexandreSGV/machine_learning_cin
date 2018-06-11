@@ -1,5 +1,5 @@
 import numpy as np
-from common_lib import *
+from common import *
 from sklearn.neighbors.kde import KernelDensity
 from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import RepeatedStratifiedKFold
@@ -46,8 +46,8 @@ def estimador_parzen(conjunto_treinamento, elemento_teste, h):
 #  calculate evidence from all sample likelihoods
 def calcular_evidencia(likelihoods, priors):
     evidence = 0
-    for classe, elementos in likelihoods.items():
-        evidence = evidence + (likelihoods[classe] * priors[classe])
+    for classe, elemento in likelihoods.items():
+        evidence = evidence + (elemento * priors[classe])
     return evidence
 
 def calcula_posteriori(priori, densidade, evidencia):
@@ -124,10 +124,10 @@ def executaParzen(dados, gabarito, nomeClasses, repeticoes, splits,
 
             # usado para gerar matriz de confusao
             prediction = []
-            
+
             prediction.append(nomeClasses.tolist().index(classe_correta))
             prediction.append(nomeClasses.tolist().index(predicted_class))
-            
+
             repetition_predictions.append(prediction)
             if (predicted_class == classe_correta):
                 hits += 1
@@ -141,7 +141,7 @@ def executaParzen(dados, gabarito, nomeClasses, repeticoes, splits,
         error_rate = errors / (hits + errors)
         error_rates.append(error_rate)
         predictions.append(repetition_predictions)
-        
+
         for i in range(len(gabarito_conj_teste)):
             if (gabarito_conj_teste[i] == estimativas[i]):
                 acertos += 1

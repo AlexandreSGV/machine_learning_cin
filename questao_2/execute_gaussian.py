@@ -1,6 +1,7 @@
 import operator
 import pandas as pd
 from gaussian import *
+from common import *
 import numpy as np
 import codigo_modulado as code
 import time
@@ -10,6 +11,7 @@ from sklearn.model_selection import RepeatedStratifiedKFold
 startTotalTime = time.time()
 repeticoes = 2
 splits = 2
+elementsByClass = 300
 
 
 df = pd.read_csv('data/segmentation_18_col.csv', sep=',')
@@ -19,35 +21,85 @@ print (nomeClasses)
 gabarito = df.CLASSE.values
 
 
-
+# ##############################################################
 # Complete View
 startCompleteViewTime = time.time()
-print('CompleteView ####################')
+print('#################### COMPLETE VIEW ####################')
 dadosCompleteView = df.iloc[:, 1:].values
 predictions, error_rates, acuracias = executaGaussiana(
     dadosCompleteView, gabarito, nomeClasses, repeticoes, splits)
 for indice, a in enumerate(acuracias):
     print(indice, ': %.5f' % (a))
+
+print("\tCOMPLETE VIEW: Confusion Matrix ####################")
+confusionMatrix = calculateConfusionMatrix(predictions)
+print(np.array_str(confusionMatrix, precision=6, suppress_small=True))
+print("")
+
+print("\tCOMPLETE VIEW: Precision by Class")
+precision_by_class = confusionMatrix.diagonal() / float(
+    elementsByClass * repeticoes)
+print(precision_by_class)
+print("")
+
+print("\tCOMPLETE VIEW: precision average %s" % np.mean(precision_by_class))
+print("\tCOMPLETE VIEW: error rate average %s" % np.mean(error_rates))
+print("")
+
 endCompleteViewTime = time.time()
 
+# ##############################################################
 # Shape View
 startShapeViewTime = time.time()
-print('ShapeView ####################')
+print('#################### SHAPE VIEW ####################')
 dadosShapeView = df.iloc[:, 1:9].values
-acuracias = executaGaussiana(dadosShapeView, gabarito, nomeClasses, repeticoes,
-                             splits)
+predictions, error_rates, acuracias = executaGaussiana(
+    dadosShapeView, gabarito, nomeClasses, repeticoes, splits)
 for indice, a in enumerate(acuracias):
     print(indice, ': %.5f' %(a) )
+
+print("\tSHAPE VIEW: Confusion Matrix ####################")
+confusionMatrix = calculateConfusionMatrix(predictions)
+print(np.array_str(confusionMatrix, precision=6, suppress_small=True))
+print("")
+
+print("\tSHAPE VIEW: Precision by Class")
+precision_by_class = confusionMatrix.diagonal() / float(
+    elementsByClass * repeticoes)
+print(precision_by_class)
+print("")
+
+print("\tSHAPE VIEW: precision average %s" % np.mean(precision_by_class))
+print("\tSHAPE VIEW: error rate average %s" % np.mean(error_rates))
+print("")
+
 endShapeViewTime = time.time()
 
+# ##############################################################
 # RGB View
 startRGBViewTime = time.time()
-print('RGBView ####################')
+print('#################### RGB VIEW ####################')
 dadosRGBView = df.iloc[:, 9:19].values
-acuracias = executaGaussiana(dadosRGBView, gabarito, nomeClasses,
-                             repeticoes, splits)
+predictions, error_rates, acuracias = executaGaussiana(
+    dadosRGBView, gabarito, nomeClasses, repeticoes, splits)
 for indice, a in enumerate(acuracias):
     print(indice, ': %.5f' % (a))
+
+print("\tRGB VIEW: Confusion Matrix ####################")
+confusionMatrix = calculateConfusionMatrix(predictions)
+print(np.array_str(confusionMatrix, precision=6, suppress_small=True))
+print("")
+
+print("\tRGB VIEW: Precision by Class")
+precision_by_class = confusionMatrix.diagonal() / float(
+    elementsByClass * repeticoes)
+print(precision_by_class)
+print("")
+
+print("\tRGB VIEW: precision average %s" % np.mean(precision_by_class))
+print("\tRGB VIEW: error rate average %s" % np.mean(error_rates))
+print("")
+
 endRGBViewTime = time.time()
 
 

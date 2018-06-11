@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
-from common_lib import *
-from parzem_lib import *
+from common import *
+from parzen import *
 import time
 startTotalTime = time.time()
 # startTotalTime = time.time()
@@ -29,7 +29,7 @@ gabarito = df.CLASSE.values
 startCompleteViewTime = time.time()
 print('#################### COMPLETE VIEW ####################')
 dadosCompleteView = df.iloc[:, 1:].values
-print('COMPLETE Columns', df.iloc[:, 1:].columns)
+# print('COMPLETE Columns', df.iloc[:, 1:].columns)
 
 predictions, error_rates, acuracias = executaParzen(
     dadosCompleteView, gabarito, nomeClasses, repeticoes, splits,
@@ -58,7 +58,7 @@ endCompleteViewTime = time.time()
 startShapeViewTime = time.time()
 print('#################### SHAPE VIEW ####################')
 dadosShapeView = df.iloc[:, 1:9].values
-print('Shape Columns', df.iloc[:, 1:9].columns)
+# print('Shape Columns', df.iloc[:, 1:9].columns)
 
 predictions, error_rates, acuracias = executaParzen(
     dadosShapeView, gabarito, nomeClasses, repeticoes, splits,
@@ -87,7 +87,8 @@ endShapeViewTime = time.time()
 startRGBViewTime = time.time()
 print('#################### RGB VIEW ####################')
 dadosRGBView = df.iloc[:, 9:19].values
-print('RGB Columns', df.iloc[:, 9:19].columns)
+# print('RGB Columns', df.iloc[:, 9:19].columns)
+
 predictions, error_rates, acuracias = executaParzen(
     dadosRGBView, gabarito, nomeClasses, repeticoes, splits,
     elementsByClass)
