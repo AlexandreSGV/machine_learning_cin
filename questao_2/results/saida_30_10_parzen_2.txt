@@ -1,0 +1,1070 @@
+colluns Index(['CLASSE', 'REGION-CENTROID-COL', 'REGION-CENTROID-ROW',
+       'SHORT-LINE-DENSITY-5', 'SHORT-LINE-DENSITY-2', 'VEDGE-MEAN',
+       'VEDGE-SD', 'HEDGE-MEAN', 'HEDGE-SD', 'INTENSITY-MEAN', 'RAWRED-MEAN',
+       'RAWBLUE-MEAN', 'RAWGREEN-MEAN', 'EXRED-MEAN', 'EXBLUE-MEAN',
+       'EXGREEN-MEAN', 'VALUE-MEAN', 'SATURATION-MEAN', 'HUE-MEAN'],
+      dtype='object')
+['BRICKFACE' 'CEMENT' 'FOLIAGE' 'GRASS' 'PATH' 'SKY' 'WINDOW']
+#################### COMPLETE VIEW ####################
+RGB Columns Index(['REGION-CENTROID-COL', 'REGION-CENTROID-ROW', 'SHORT-LINE-DENSITY-5',
+       'SHORT-LINE-DENSITY-2', 'VEDGE-MEAN', 'VEDGE-SD', 'HEDGE-MEAN',
+       'HEDGE-SD', 'INTENSITY-MEAN', 'RAWRED-MEAN', 'RAWBLUE-MEAN',
+       'RAWGREEN-MEAN', 'EXRED-MEAN', 'EXBLUE-MEAN', 'EXGREEN-MEAN',
+       'VALUE-MEAN', 'SATURATION-MEAN', 'HUE-MEAN'],
+      dtype='object')
+bandwidth:  10.0
+cont  1
+cont  2
+cont  3
+cont  4
+cont  5
+cont  6
+cont  7
+cont  8
+cont  9
+cont  10
+cont  11
+cont  12
+cont  13
+cont  14
+cont  15
+cont  16
+cont  17
+cont  18
+cont  19
+cont  20
+cont  21
+cont  22
+cont  23
+cont  24
+cont  25
+cont  26
+cont  27
+cont  28
+cont  29
+cont  30
+cont  31
+cont  32
+cont  33
+cont  34
+cont  35
+cont  36
+cont  37
+cont  38
+cont  39
+cont  40
+cont  41
+cont  42
+cont  43
+cont  44
+cont  45
+cont  46
+cont  47
+cont  48
+cont  49
+cont  50
+cont  51
+cont  52
+cont  53
+cont  54
+cont  55
+cont  56
+cont  57
+cont  58
+cont  59
+cont  60
+cont  61
+cont  62
+cont  63
+cont  64
+cont  65
+cont  66
+cont  67
+cont  68
+cont  69
+cont  70
+cont  71
+cont  72
+cont  73
+cont  74
+cont  75
+cont  76
+cont  77
+cont  78
+cont  79
+cont  80
+cont  81
+cont  82
+cont  83
+cont  84
+cont  85
+cont  86
+cont  87
+cont  88
+cont  89
+cont  90
+cont  91
+cont  92
+cont  93
+cont  94
+cont  95
+cont  96
+cont  97
+cont  98
+cont  99
+cont  100
+cont  101
+cont  102
+cont  103
+cont  104
+cont  105
+cont  106
+cont  107
+cont  108
+cont  109
+cont  110
+cont  111
+cont  112
+cont  113
+cont  114
+cont  115
+cont  116
+cont  117
+cont  118
+cont  119
+cont  120
+cont  121
+cont  122
+cont  123
+cont  124
+cont  125
+cont  126
+cont  127
+cont  128
+cont  129
+cont  130
+cont  131
+cont  132
+cont  133
+cont  134
+cont  135
+cont  136
+cont  137
+cont  138
+cont  139
+cont  140
+cont  141
+cont  142
+cont  143
+cont  144
+cont  145
+cont  146
+cont  147
+cont  148
+cont  149
+cont  150
+cont  151
+cont  152
+cont  153
+cont  154
+cont  155
+cont  156
+cont  157
+cont  158
+cont  159
+cont  160
+cont  161
+cont  162
+cont  163
+cont  164
+cont  165
+cont  166
+cont  167
+cont  168
+cont  169
+cont  170
+cont  171
+cont  172
+cont  173
+cont  174
+cont  175
+cont  176
+cont  177
+cont  178
+cont  179
+cont  180
+cont  181
+cont  182
+cont  183
+cont  184
+cont  185
+cont  186
+cont  187
+cont  188
+cont  189
+cont  190
+cont  191
+cont  192
+cont  193
+cont  194
+cont  195
+cont  196
+cont  197
+cont  198
+cont  199
+cont  200
+cont  201
+cont  202
+cont  203
+cont  204
+cont  205
+cont  206
+cont  207
+cont  208
+cont  209
+cont  210
+cont  211
+cont  212
+cont  213
+cont  214
+cont  215
+cont  216
+cont  217
+cont  218
+cont  219
+cont  220
+cont  221
+cont  222
+cont  223
+cont  224
+cont  225
+cont  226
+cont  227
+cont  228
+cont  229
+cont  230
+cont  231
+cont  232
+cont  233
+cont  234
+cont  235
+cont  236
+cont  237
+cont  238
+cont  239
+cont  240
+cont  241
+cont  242
+cont  243
+cont  244
+cont  245
+cont  246
+cont  247
+cont  248
+cont  249
+cont  250
+cont  251
+cont  252
+cont  253
+cont  254
+cont  255
+cont  256
+cont  257
+cont  258
+cont  259
+cont  260
+cont  261
+cont  262
+cont  263
+cont  264
+cont  265
+cont  266
+cont  267
+cont  268
+cont  269
+cont  270
+cont  271
+cont  272
+cont  273
+cont  274
+cont  275
+cont  276
+cont  277
+cont  278
+cont  279
+cont  280
+cont  281
+cont  282
+cont  283
+cont  284
+cont  285
+cont  286
+cont  287
+cont  288
+cont  289
+cont  290
+cont  291
+cont  292
+cont  293
+cont  294
+cont  295
+cont  296
+cont  297
+cont  298
+cont  299
+cont  300
+0 : 0.94143
+1 : 0.94333
+2 : 0.94143
+3 : 0.94571
+4 : 0.94762
+5 : 0.94619
+6 : 0.94190
+7 : 0.94429
+8 : 0.94476
+9 : 0.93952
+10 : 0.94429
+11 : 0.94190
+12 : 0.94381
+13 : 0.94286
+14 : 0.94381
+15 : 0.94333
+16 : 0.94571
+17 : 0.94048
+18 : 0.94000
+19 : 0.94333
+20 : 0.94143
+21 : 0.94476
+22 : 0.94238
+23 : 0.94190
+24 : 0.94571
+25 : 0.94333
+26 : 0.93810
+27 : 0.94619
+28 : 0.94333
+29 : 0.94048
+	COMPLETE VIEW: Confusion Matrix ####################
+[[ 8653.     0.   102.     0.     0.     0.   245.]
+ [  246.  8098.   119.    10.    57.     0.   470.]
+ [   96.    38.  8332.     0.    30.     0.   504.]
+ [    0.     3.     0.  8997.     0.     0.     0.]
+ [    0.     0.     0.     0.  9000.     0.     0.]
+ [    0.     0.     0.     0.     0.  9000.     0.]
+ [  433.   113.  1110.     0.     8.     0.  7336.]]
+
+	COMPLETE VIEW: Precision by Class
+[ 0.96144444  0.89977778  0.92577778  0.99966667  1.          1.
+  0.81511111]
+
+	COMPLETE VIEW: precision average 0.943111111111
+	COMPLETE VIEW: error rate average 0.0568888888889
+
+#################### SHAPE VIEW ####################
+Shape Columns Index(['REGION-CENTROID-COL', 'REGION-CENTROID-ROW', 'SHORT-LINE-DENSITY-5',
+       'SHORT-LINE-DENSITY-2', 'VEDGE-MEAN', 'VEDGE-SD', 'HEDGE-MEAN',
+       'HEDGE-SD'],
+      dtype='object')
+bandwidth:  10.0
+cont  1
+cont  2
+cont  3
+cont  4
+cont  5
+cont  6
+cont  7
+cont  8
+cont  9
+cont  10
+cont  11
+cont  12
+cont  13
+cont  14
+cont  15
+cont  16
+cont  17
+cont  18
+cont  19
+cont  20
+cont  21
+cont  22
+cont  23
+cont  24
+cont  25
+cont  26
+cont  27
+cont  28
+cont  29
+cont  30
+cont  31
+cont  32
+cont  33
+cont  34
+cont  35
+cont  36
+cont  37
+cont  38
+cont  39
+cont  40
+cont  41
+cont  42
+cont  43
+cont  44
+cont  45
+cont  46
+cont  47
+cont  48
+cont  49
+cont  50
+cont  51
+cont  52
+cont  53
+cont  54
+cont  55
+cont  56
+cont  57
+cont  58
+cont  59
+cont  60
+cont  61
+cont  62
+cont  63
+cont  64
+cont  65
+cont  66
+cont  67
+cont  68
+cont  69
+cont  70
+cont  71
+cont  72
+cont  73
+cont  74
+cont  75
+cont  76
+cont  77
+cont  78
+cont  79
+cont  80
+cont  81
+cont  82
+cont  83
+cont  84
+cont  85
+cont  86
+cont  87
+cont  88
+cont  89
+cont  90
+cont  91
+cont  92
+cont  93
+cont  94
+cont  95
+cont  96
+cont  97
+cont  98
+cont  99
+cont  100
+cont  101
+cont  102
+cont  103
+cont  104
+cont  105
+cont  106
+cont  107
+cont  108
+cont  109
+cont  110
+cont  111
+cont  112
+cont  113
+cont  114
+cont  115
+cont  116
+cont  117
+cont  118
+cont  119
+cont  120
+cont  121
+cont  122
+cont  123
+cont  124
+cont  125
+cont  126
+cont  127
+cont  128
+cont  129
+cont  130
+cont  131
+cont  132
+cont  133
+cont  134
+cont  135
+cont  136
+cont  137
+cont  138
+cont  139
+cont  140
+cont  141
+cont  142
+cont  143
+cont  144
+cont  145
+cont  146
+cont  147
+cont  148
+cont  149
+cont  150
+cont  151
+cont  152
+cont  153
+cont  154
+cont  155
+cont  156
+cont  157
+cont  158
+cont  159
+cont  160
+cont  161
+cont  162
+cont  163
+cont  164
+cont  165
+cont  166
+cont  167
+cont  168
+cont  169
+cont  170
+cont  171
+cont  172
+cont  173
+cont  174
+cont  175
+cont  176
+cont  177
+cont  178
+cont  179
+cont  180
+cont  181
+cont  182
+cont  183
+cont  184
+cont  185
+cont  186
+cont  187
+cont  188
+cont  189
+cont  190
+cont  191
+cont  192
+cont  193
+cont  194
+cont  195
+cont  196
+cont  197
+cont  198
+cont  199
+cont  200
+cont  201
+cont  202
+cont  203
+cont  204
+cont  205
+cont  206
+cont  207
+cont  208
+cont  209
+cont  210
+cont  211
+cont  212
+cont  213
+cont  214
+cont  215
+cont  216
+cont  217
+cont  218
+cont  219
+cont  220
+cont  221
+cont  222
+cont  223
+cont  224
+cont  225
+cont  226
+cont  227
+cont  228
+cont  229
+cont  230
+cont  231
+cont  232
+cont  233
+cont  234
+cont  235
+cont  236
+cont  237
+cont  238
+cont  239
+cont  240
+cont  241
+cont  242
+cont  243
+cont  244
+cont  245
+cont  246
+cont  247
+cont  248
+cont  249
+cont  250
+cont  251
+cont  252
+cont  253
+cont  254
+cont  255
+cont  256
+cont  257
+cont  258
+cont  259
+cont  260
+cont  261
+cont  262
+cont  263
+cont  264
+cont  265
+cont  266
+cont  267
+cont  268
+cont  269
+cont  270
+cont  271
+cont  272
+cont  273
+cont  274
+cont  275
+cont  276
+cont  277
+cont  278
+cont  279
+cont  280
+cont  281
+cont  282
+cont  283
+cont  284
+cont  285
+cont  286
+cont  287
+cont  288
+cont  289
+cont  290
+cont  291
+cont  292
+cont  293
+cont  294
+cont  295
+cont  296
+cont  297
+cont  298
+cont  299
+cont  300
+0 : 0.59000
+1 : 0.59048
+2 : 0.59381
+3 : 0.58667
+4 : 0.59333
+5 : 0.58762
+6 : 0.59571
+7 : 0.59048
+8 : 0.59190
+9 : 0.58857
+10 : 0.58429
+11 : 0.58952
+12 : 0.59143
+13 : 0.58810
+14 : 0.58810
+15 : 0.58571
+16 : 0.58571
+17 : 0.59048
+18 : 0.58571
+19 : 0.58238
+20 : 0.58286
+21 : 0.59048
+22 : 0.58857
+23 : 0.58810
+24 : 0.59143
+25 : 0.58619
+26 : 0.58857
+27 : 0.58476
+28 : 0.59190
+29 : 0.58333
+	SHAPE VIEW: Confusion Matrix ####################
+[[ 4039.   114.  3141.     0.     0.   573.  1133.]
+ [ 1799.  1200.  1955.   174.     2.  1611.  2259.]
+ [ 1563.   232.  5954.     0.    30.    48.  1173.]
+ [    0.    88.    26.  5243.  3275.     0.   368.]
+ [    0.     0.     0.   459.  8541.     0.     0.]
+ [  910.   320.   298.     0.     0.  6947.   525.]
+ [  653.   465.  1673.     2.    46.  1007.  5154.]]
+
+	SHAPE VIEW: Precision by Class
+[ 0.44877778  0.13333333  0.66155556  0.58255556  0.949       0.77188889
+  0.57266667]
+
+	SHAPE VIEW: precision average 0.58853968254
+	SHAPE VIEW: error rate average 0.41146031746
+
+#################### RGB VIEW ####################
+RGB Columns Index(['INTENSITY-MEAN', 'RAWRED-MEAN', 'RAWBLUE-MEAN', 'RAWGREEN-MEAN',
+       'EXRED-MEAN', 'EXBLUE-MEAN', 'EXGREEN-MEAN', 'VALUE-MEAN',
+       'SATURATION-MEAN', 'HUE-MEAN'],
+      dtype='object')
+bandwidth:  1.99526231497
+cont  1
+cont  2
+cont  3
+cont  4
+cont  5
+cont  6
+cont  7
+cont  8
+cont  9
+cont  10
+cont  11
+cont  12
+cont  13
+cont  14
+cont  15
+cont  16
+cont  17
+cont  18
+cont  19
+cont  20
+cont  21
+cont  22
+cont  23
+cont  24
+cont  25
+cont  26
+cont  27
+cont  28
+cont  29
+cont  30
+cont  31
+cont  32
+cont  33
+cont  34
+cont  35
+cont  36
+cont  37
+cont  38
+cont  39
+cont  40
+cont  41
+cont  42
+cont  43
+cont  44
+cont  45
+cont  46
+cont  47
+cont  48
+cont  49
+cont  50
+cont  51
+cont  52
+cont  53
+cont  54
+cont  55
+cont  56
+cont  57
+cont  58
+cont  59
+cont  60
+cont  61
+cont  62
+cont  63
+cont  64
+cont  65
+cont  66
+cont  67
+cont  68
+cont  69
+cont  70
+cont  71
+cont  72
+cont  73
+cont  74
+cont  75
+cont  76
+cont  77
+cont  78
+cont  79
+cont  80
+cont  81
+cont  82
+cont  83
+cont  84
+cont  85
+cont  86
+cont  87
+cont  88
+cont  89
+cont  90
+cont  91
+cont  92
+cont  93
+cont  94
+cont  95
+cont  96
+cont  97
+cont  98
+cont  99
+cont  100
+cont  101
+cont  102
+cont  103
+cont  104
+cont  105
+cont  106
+cont  107
+cont  108
+cont  109
+cont  110
+cont  111
+cont  112
+cont  113
+cont  114
+cont  115
+cont  116
+cont  117
+cont  118
+cont  119
+cont  120
+cont  121
+cont  122
+cont  123
+cont  124
+cont  125
+cont  126
+cont  127
+cont  128
+cont  129
+cont  130
+cont  131
+cont  132
+cont  133
+cont  134
+cont  135
+cont  136
+cont  137
+cont  138
+cont  139
+cont  140
+cont  141
+cont  142
+cont  143
+cont  144
+cont  145
+cont  146
+cont  147
+cont  148
+cont  149
+cont  150
+cont  151
+cont  152
+cont  153
+cont  154
+cont  155
+cont  156
+cont  157
+cont  158
+cont  159
+cont  160
+cont  161
+cont  162
+cont  163
+cont  164
+cont  165
+cont  166
+cont  167
+cont  168
+cont  169
+cont  170
+cont  171
+cont  172
+cont  173
+cont  174
+cont  175
+cont  176
+cont  177
+cont  178
+cont  179
+cont  180
+cont  181
+cont  182
+cont  183
+cont  184
+cont  185
+cont  186
+cont  187
+cont  188
+cont  189
+cont  190
+cont  191
+cont  192
+cont  193
+cont  194
+cont  195
+cont  196
+cont  197
+cont  198
+cont  199
+cont  200
+cont  201
+cont  202
+cont  203
+cont  204
+cont  205
+cont  206
+cont  207
+cont  208
+cont  209
+cont  210
+cont  211
+cont  212
+cont  213
+cont  214
+cont  215
+cont  216
+cont  217
+cont  218
+cont  219
+cont  220
+cont  221
+cont  222
+cont  223
+cont  224
+cont  225
+cont  226
+cont  227
+cont  228
+cont  229
+cont  230
+cont  231
+cont  232
+cont  233
+cont  234
+cont  235
+cont  236
+cont  237
+cont  238
+cont  239
+cont  240
+cont  241
+cont  242
+cont  243
+cont  244
+cont  245
+cont  246
+cont  247
+cont  248
+cont  249
+cont  250
+cont  251
+cont  252
+cont  253
+cont  254
+cont  255
+cont  256
+cont  257
+cont  258
+cont  259
+cont  260
+cont  261
+cont  262
+cont  263
+cont  264
+cont  265
+cont  266
+cont  267
+cont  268
+cont  269
+cont  270
+cont  271
+cont  272
+cont  273
+cont  274
+cont  275
+cont  276
+cont  277
+cont  278
+cont  279
+cont  280
+cont  281
+cont  282
+cont  283
+cont  284
+cont  285
+cont  286
+cont  287
+cont  288
+cont  289
+cont  290
+cont  291
+cont  292
+cont  293
+cont  294
+cont  295
+cont  296
+cont  297
+cont  298
+cont  299
+cont  300
+0 : 0.88524
+1 : 0.88714
+2 : 0.88619
+3 : 0.88857
+4 : 0.88571
+5 : 0.88857
+6 : 0.88571
+7 : 0.88714
+8 : 0.88571
+9 : 0.88571
+10 : 0.88714
+11 : 0.88476
+12 : 0.88667
+13 : 0.88524
+14 : 0.88381
+15 : 0.88476
+16 : 0.89000
+17 : 0.88714
+18 : 0.88286
+19 : 0.88952
+20 : 0.88333
+21 : 0.88381
+22 : 0.88762
+23 : 0.88810
+24 : 0.88190
+25 : 0.88667
+26 : 0.88476
+27 : 0.88571
+28 : 0.88952
+29 : 0.88714
+	RGB VIEW: Confusion Matrix ####################
+[[ 8844.     0.     0.     0.     0.     0.   156.]
+ [   30.  6026.   103.    57.  2135.     0.   649.]
+ [    0.   245.  7646.     0.    91.     0.  1018.]
+ [    2.    30.    28.  8938.     0.     0.     2.]
+ [    0.   666.     1.     0.  8332.     0.     1.]
+ [    0.     0.     0.     0.     0.  9000.     0.]
+ [   61.   250.  1614.     0.    30.     0.  7045.]]
+
+	RGB VIEW: Precision by Class
+[ 0.98266667  0.66955556  0.84955556  0.99311111  0.92577778  1.
+  0.78277778]
+
+	RGB VIEW: precision average 0.886206349206
+	RGB VIEW: error rate average 0.113793650794
+
+TEMPOS DE EXECUÇÃO 
+CompleteView : 76.35 segundos
+ShapeView    : 47.84 segundos
+RGBView      : 55.83 segundos
+Total        : 180.04 segundos

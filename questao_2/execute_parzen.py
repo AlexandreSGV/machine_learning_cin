@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+from common_lib import *
 from parzem_lib import *
 import time
 startTotalTime = time.time()
@@ -9,8 +10,8 @@ splits = 10
 elementsByClass = 300
 
 # df = pd.read_csv('image_segmentation_18_2098.csv', sep=';')
-df = pd.read_csv('segmentation_18_col.csv', sep=',')
-print('colluns', df.columns)
+df = pd.read_csv('data/segmentation_18_col.csv', sep=',')
+# print('colluns', df.columns)
 df = df.sort_values('CLASSE')
 
 # raise Exception()
@@ -28,7 +29,7 @@ gabarito = df.CLASSE.values
 startCompleteViewTime = time.time()
 print('#################### COMPLETE VIEW ####################')
 dadosCompleteView = df.iloc[:, 1:].values
-print('RGB Columns', df.iloc[:, 1:].columns)
+print('COMPLETE Columns', df.iloc[:, 1:].columns)
 
 predictions, error_rates, acuracias = executaParzen(
     dadosCompleteView, gabarito, nomeClasses, repeticoes, splits,

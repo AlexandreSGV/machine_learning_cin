@@ -1,216 +1,156 @@
-import operator
-import pandas as pd
-from gaussian_lib import *
 import numpy as np
-import codigo_modulado as code
-import time
-# from sklearn.naive_bayes import GaussianNB
+import bigfloat
+from common import *
 from sklearn.model_selection import RepeatedStratifiedKFold
 
-startTotalTime = time.time()
-repeticoes = 30
-splits = 10
+# X grupo em que se quer calcular a média
+def calcula_mi(X):
+    X = np.array(X)
+    # print('X', X)
+    soma = np.zeros(X.shape[1])
 
 
-df = pd.read_csv('segmentation_18_col.csv', sep=',')
-nomeClasses = df.CLASSE.unique()
-print (nomeClasses)
+    for i in range(len(X)):
+        soma += X[i]
+    soma /= len(X)
 
-gabarito = df.CLASSE.values
+    return soma
+
+# X é vetor com elementos do grupo (shape NxD)
+# mi é média dos elementos do grupo
+def calcula_sigma(X, mi):
+    X = np.array(X)
+    soma = np.zeros((X.shape[1],X.shape[1]))
+    n = len(X)
+
+    for i in range(n):
+        xk = X[i].reshape(len(X[i]), 1)
+        xkt = X[i].reshape(1, xk.shape[0])
+        soma += np.dot(xk, xkt)
+
+    mii = mi.reshape(len(mi), 1)
+    miit = mi.reshape(1, mii.shape[0])
+
+    soma -= n * np.dot(mii, miit)
+    soma /= n
+
+    soma = soma * np.identity(soma.shape[1])
+    return soma
+
+def estimar_parametros(conj_treinamento):
+    mis = {}
+    sigmas = {}
+    for classe, elementos in conj_treinamento.items():
+        mis[classe] = calcula_mi(elementos)
+        sigmas[classe] = calcula_sigma(elementos, mis[classe])
+    return mis, sigmas
+
+def calcula_posteriori(xk, mi, sigma):
+    d = mi.shape[0]
+    pi = ((2 * np.pi)**(-d/2))
+    determinante =  (np.linalg.det( np.linalg.pinv(sigma)) ** 0.5)
+    xk = xk.reshape(1,len(xk))
+    mi = mi.reshape(1,len(mi))
+
+    diff = (xk - mi)
+    parte3 = diff.reshape(1,diff.shape[1])
+
+    parte1 = diff.reshape(diff.shape[1],1)
+
+    parte2 = np.linalg.pinv(sigma)
+
+    mult1 = np.dot(parte2,parte1)
+
+    mult2 = np.dot(parte3, mult1)
+
+    exponencial = np.exp( (-1/2) * mult2 )
 
 
+    return pi * determinante * exponencial
 
-# Complete View
-startCompleteViewTime = time.time()
-print('CompleteView ####################')
-dadosCompleteView = df.iloc[:, 1:].values
-acuracias = executaGaussiana(dadosCompleteView, gabarito,
-                             nomeClasses, repeticoes, splits)
-for indice, a in enumerate(acuracias):
-    print(indice, ': %.5f' % (a))
-endCompleteViewTime = time.time()
+# falta testar
+def predictGauss(elemento_teste, prioris, mis, sigmas):
 
-# Shape View
-startShapeViewTime = time.time()
-print('ShapeView ####################')
-dadosShapeView = df.iloc[:, 1:9].values
-acuracias = executaGaussiana(dadosShapeView, gabarito, nomeClasses, repeticoes,
-                             splits)
-for indice, a in enumerate(acuracias):
-    print(indice, ': %.5f' %(a) )
-endShapeViewTime = time.time()
+    probabilidades = {}
+    for classe in prioris:
+        posteriori = calcula_posteriori(elemento_teste, mis[classe],
+                                        sigmas[classe])
+        parte1 = posteriori * prioris[classe]
+        parte2 = 0
+        for r in mis.keys():
+            parte2 += calcula_posteriori(elemento_teste,mis[r],sigmas[r]) *  prioris[r]
+        probabilidades[classe] = parte1 / parte2
 
-# RGB View
-startRGBViewTime = time.time()
-print('RGBView ####################')
-dadosRGBView = df.iloc[:, 9:19].values
-acuracias = executaGaussiana(dadosRGBView, gabarito, nomeClasses,
-                             repeticoes, splits)
-for indice, a in enumerate(acuracias):
-    print(indice, ': %.5f' % (a))
-endRGBViewTime = time.time()
+    return max(probabilidades.keys(), key=(lambda k: probabilidades[k]))
+
+def executaGaussiana(dados, gabarito, nomeClasses, repeticoes, splits):
+
+    rskf = RepeatedStratifiedKFold(
+        n_splits=splits, n_repeats=repeticoes, random_state=123456789)
 
 
-endTotalTime = time.time()
+    cont = 0
+    acertos = 0
+    erros = 0
+    acuracias = []
 
-print('TEMPOS DE EXECUÇÃO ')
-print("CompleteView : %.2f segundos" %
-      (endCompleteViewTime - startCompleteViewTime))
-print("ShapeView    : %.2f segundos" % (endShapeViewTime - startShapeViewTime))
-print("RGBView      : %.2f segundos" % (endRGBViewTime - startRGBViewTime))
-print("Total        : %.2f segundos" % (endTotalTime - startTotalTime))
+    predictions = []
+    error_rates = []
+
+    for indices_treinamento, indices_teste in rskf.split(dados, gabarito):
+        cont += 1
+        print('cont ', cont)
+        conj_treinamento = {}
+        conj_teste = dados[indices_teste]
+        gabarito_conj_teste = gabarito[indices_teste]
+
+        for name in nomeClasses:
+            conj_treinamento[name] = []
+
+        for i in indices_treinamento:
+            conj_treinamento[gabarito[i]].append(dados[i])
 
 
-# rskf = RepeatedStratifiedKFold(
-#     n_splits=splits, n_repeats=repeticoes, random_state=123456789)
-# cont = 0
-# acertos = 0
-# erros = 0
-# acuracias = []
-# for indices_treinamento, indices_teste in rskf.split(dados, gabarito):
-#     cont += 1
-#     print('cont ', cont)
-#     conj_treinamento = {}
-#     conj_teste = dados[indices_teste]
-#     gabarito_conj_teste = gabarito[indices_teste]
+        probabilidadesPriori = calculatePrior(conj_treinamento)
+        mis, sigmas = estimar_parametros(conj_treinamento)
 
-#     for name in nomeClasses :
-#         conj_treinamento[name] = []
 
-#     for i in indices_treinamento:
-#         conj_treinamento[gabarito[i]].append( dados[i])
+        estimativas = []
+        errors = 0
+        hits = 0
+        repetition_predictions = []
+        for indice, elemento_teste in enumerate(conj_teste):
 
-#     qtdClasses = {}
-#     probabilidadesPriori  = {}
-#     mis = {}
-#     sigmas  = {}
-#     for classe , elementos in conj_treinamento.items():
-#         # print('classe',classe)
-#         qtdClasses[classe] = len(elementos)
-#         probabilidadesPriori[classe] = qtdClasses[classe] / len(indices_treinamento)
-#         mis[classe] = calcula_mi(elementos)
-#         sigmas[classe] = calcula_sigma(elementos, mis[classe])
 
-#     estimativas = []
-#     for xk in conj_teste:
-#         probabilidades = {}
-#         for name in nomeClasses:
-#             probabilidades[name] = calcula_bayesianoGaussiano(
-#                 xk, name, probabilidadesPriori, mis, sigmas)
+            predicted_class = predictGauss( elemento_teste, probabilidadesPriori, mis, sigmas)
+            classe_correta = gabarito_conj_teste[indice]
 
-#         estimativas.append(max(probabilidades.keys(), key=(lambda k: probabilidades[k])))
 
-#     for i in range(len(gabarito_conj_teste)):
-#         # print(gabarito_conj_teste[i], ' - ', estimativas[i], ' - ', gabarito_conj_teste[i] == estimativas[i])
-#         if (gabarito_conj_teste[i] == estimativas[i]):
-#             acertos +=1
-#         else:
-#             erros +=1
-#     if (cont % splits == 0):
-#         # print('Repetição ', int(cont / splits))
-#         # print('Tamanho conjunto de testes : ', acertos+erros)
-#         # print('acertos : ', acertos)
-#         # print('erros : ', erros)
-#         # print('acurácia : ', acertos / (acertos + erros))
-#         acuracias.append(acertos / (acertos + erros))
-#         acertos = 0
-#         erros = 0
+            # usado para gerar matriz de confusao
+            prediction = []
+            prediction.append(nomeClasses.tolist().index(classe_correta))
+            prediction.append(nomeClasses.tolist().index(predicted_class))
+            repetition_predictions.append(prediction)
+            if (predicted_class == classe_correta):
+                hits += 1
+            else:
+                errors += 1
 
-# print('conj treinamento', conj_treinamento)
-# for name in nomeClasses :
-#     print('name', name)
-#     print (dados[indices_treinamento][np.where(
-#         dados[indices_treinamento][:, 0] == name) ] )
+            # usado para gerar tabela de acusária de 1 a N Repetions
+            estimativas.append(predicted_class)
 
-# print(dados[indices_treinamento][ : , 1: ])
-# print(indices_teste.shape)
+        error_rate = errors / (hits + errors)
+        error_rates.append(error_rate)
+        predictions.append(repetition_predictions)
 
-# Percentual usado para treinamento
-# porcentagemTreinamento = 80
-
-# # seleciona elementos do grupo de treinamento aleatoriamente
-# df_treinamento = df.sample(int(round( (len(df.values) * porcentagemTreinamento)/100)))
-# # grupo de teste são os elementos que não estao em treinamento
-# df_teste = df.drop(df_treinamento.index)
-
-# w = {}
-# wCount = {}
-# prioridadesPriori  = {}
-# mis = {}
-# sigmas  = {}
-# # Inicializa variáveis
-
-# # for i in range(7):
-# #     print(np.linalg.det(np.linalg.pinv(np.identity(18) * gnb.sigma_[i])))
-# for name in nomeClasses:
-#     w[name] = df_treinamento[df_treinamento.CLASSE == name].iloc[:, 1:].values
-
-#     wCount[name] = len(df_treinamento[df_treinamento.CLASSE == name].values)
-#     prioridadesPriori[name] = wCount[name] / len(df_treinamento.values)
-#     # calcula paramentros
-#     mis[name] = calcula_mi(w[name])
-#     sigmas[name] = calcula_sigma(w[name],mis[name])
-
-# gabarito = df_teste['CLASSE'].values
-# # print(gabarito)
-# estimativa = []
-# for xk in df_teste.iloc[:, 1:].values:
-#     # print("#################")
-#     probabilidades = {}
-#     for name in w.keys():
-#         p = calcula_bayesianoGaussiano(xk, name,prioridadesPriori,mis,sigmas)
-#         probabilidades[name] = p
-#         # print('p[',name,'] ' , "%.15f" %p[0][0])
-#     # key, value = max(probabilidades.iteritems(), key=lambda x:x[1])
-#     # print('Max : ',  max(probabilidades.keys(), key=(lambda k: probabilidades[k])))
-#     estimativa.append(max(probabilidades.keys(), key=(lambda k: probabilidades[k])))
-
-# acertos = 0
-# erros = 0
-# for i in range(len(gabarito)):
-#     print (gabarito[i] , ' - ', estimativa[i] , ' - ', gabarito[i] == estimativa[i])
-#     if(gabarito[i] == estimativa[i]):
-#         acertos +=1
-#     else:
-#         erros +=1
-
-# print('Tamanho conjunto de testes : ', len(df_teste.values))
-# print('acertos : ', acertos)
-# print('erros : ', erros)
-# print('acurácia : ', acertos/len(gabarito))
-
-# X = df.iloc[:, 1:].values # conjunto de df
-# df = df.iloc[:, 1:]
-# print(df.columns)
-# X = df.values # conjunto de df
-
-# Y = df.iloc[:, 0:1].values
-# print(y)
-# c = 7
-
-# mu = calcula_mi(X)
-# sigma = calcula_sigma(X, mu)
-# for i in range(1):
-#     print('############################')
-#     print(calcula_posteriori(X[i], mu, sigma))
-
-# print(mu.shape)
-# print(len(mu))
-# print(mu)
-# print(sigma, sigma.shape)
-# print(mu.transpose())
-
-# a = np.array([2,4,6,8])
-# b = np.array([1,1,1,1,1,2])
-# c = calcula_transpose(a)
-
-# Código compara sigmas da GaussianNB e dos feitos pela fórmula do projeto
-# teste = df_treinamento.iloc[:, 1:].values
-# gabarito = df_treinamento['CLASSE'].values
-# gnb.fit(teste, gabarito)
-
-# for i in range(7):
-#     print(np.linalg.det(np.linalg.pinv( np.identity(18) *gnb.sigma_[i])))
-# print('#####################')
-# for name in nomeClasses:
-#     print (np.linalg.det(np.linalg.pinv( np.identity(18) * sigmas[name].diagonal())))
+        for i in range(len(gabarito_conj_teste)):
+            # print(gabarito_conj_teste[i], ' - ', estimativas[i], ' - ', gabarito_conj_teste[i] == estimativas[i])
+            if (gabarito_conj_teste[i] == estimativas[i]):
+                acertos += 1
+            else:
+                erros += 1
+        if (cont % splits == 0):
+            acuracias.append(acertos / (acertos + erros))
+            acertos = 0
+            erros = 0
+    return predictions, error_rates, acuracias
