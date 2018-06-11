@@ -1,3 +1,5 @@
 numpy  
 pandas  
 matplotlib
+pandas_ml
+sklearn

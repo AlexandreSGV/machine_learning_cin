@@ -11,10 +11,6 @@ def estimador_bandwidth(data):
     grid.fit(data)
     return grid.best_estimator_.bandwidth
 
-
-
-
-
 def regularization_function(h, x, x_i):
     return (x_i - x) / float(h)
 
@@ -25,7 +21,6 @@ def gaussian_window_func(conjunto_treinamento, elemento_teste, h):
     prod_sample= np.prod(x, axis=1)
     k = np.sum(prod_sample)
     return k
-
 
 # kernel estimator
 # conjunto_treinamento = training samples
@@ -53,16 +48,13 @@ def calcular_evidencia(likelihoods, priors):
 def calcula_posteriori(priori, densidade, evidencia):
     return np.float64(densidade * priori) / evidencia
 
-
-def predictParzen(elemento_teste, conjunto_treinamento, h, priori):
+def posterioris_por_classe(elemento_teste, conjunto_treinamento, h, priori):
     densidades = {}
     for classe, elementos in conjunto_treinamento.items():
         densidade = estimador_parzen(np.array(elementos), elemento_teste, h)
         densidades[classe] = densidade
 
-
     evidencia = calcular_evidencia(densidades, priori)
-
 
     # calculates posteriors
     posteriors = {}
@@ -70,6 +62,12 @@ def predictParzen(elemento_teste, conjunto_treinamento, h, priori):
         posterior = calcula_posteriori(priori[classe], densidades[classe],
                                        evidencia)
         posteriors[classe] = posterior
+
+    return posteriors
+
+
+def predictParzen(elemento_teste, conjunto_treinamento, h, priori):
+    posteriors = posterioris_por_classe(elemento_teste, conjunto_treinamento, h, priori)
 
     return max(posteriors.keys(), key=(lambda k: posteriors[k]))
 
@@ -81,10 +79,10 @@ def executaParzen(dados, gabarito, nomeClasses, repeticoes, splits,
 
     rskf = RepeatedStratifiedKFold(
         n_splits=splits, n_repeats=repeticoes, random_state=123456789)
-
-    # h = estimador_bandwidth(dados)
-    # print('bandwidth: ', h)
-    h = 6.98947320727
+    print('shape dados', dados.shape)
+    h = estimador_bandwidth(dados)
+    print('bandwidth: ', h)
+    # h = 6.98947320727
     cont = 0
     acertos = 0
     erros = 0
@@ -125,10 +123,13 @@ def executaParzen(dados, gabarito, nomeClasses, repeticoes, splits,
             # usado para gerar matriz de confusao
             prediction = []
 
-            prediction.append(nomeClasses.tolist().index(classe_correta))
-            prediction.append(nomeClasses.tolist().index(predicted_class))
+            # prediction.append(nomeClasses.tolist().index(classe_correta))
+            # prediction.append(nomeClasses.tolist().index(predicted_class))
+            prediction.append(classe_correta)
+            prediction.append(predicted_class)
+            predictions.append(prediction)
 
-            repetition_predictions.append(prediction)
+            # repetition_predictions.append(prediction)
             if (predicted_class == classe_correta):
                 hits += 1
             else:
@@ -140,7 +141,7 @@ def executaParzen(dados, gabarito, nomeClasses, repeticoes, splits,
 
         error_rate = errors / (hits + errors)
         error_rates.append(error_rate)
-        predictions.append(repetition_predictions)
+        # predictions.append(repetition_predictions)
 
         for i in range(len(gabarito_conj_teste)):
             if (gabarito_conj_teste[i] == estimativas[i]):

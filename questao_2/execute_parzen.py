@@ -3,6 +3,7 @@ import numpy as np
 from common import *
 from parzen import *
 import time
+from pandas_ml import ConfusionMatrix
 startTotalTime = time.time()
 # startTotalTime = time.time()
 repeticoes = 30
@@ -24,6 +25,9 @@ numeroClasses = len(nomeClasses)
 # dados = df.iloc[:, 1:].values
 gabarito = df.CLASSE.values
 
+# variável armazenara os resultados em cada viev (col: view x row: repetition)
+resultados = {}
+
 # ##############################################################
 # Complete View
 startCompleteViewTime = time.time()
@@ -36,16 +40,22 @@ predictions, error_rates, acuracias = executaParzen(
     elementsByClass)
 for indice, a in enumerate(acuracias):
     print(indice, ': %.5f' % (a))
+resultados['ParzenCompleteView'] = acuracias
 
 print("\tCOMPLETE VIEW: Confusion Matrix ####################")
-confusionMatrix = calculateConfusionMatrix(predictions)
-print(np.array_str(confusionMatrix, precision=6, suppress_small=True))
+predictions = np.array(predictions)
+confusion_matrix = ConfusionMatrix(predictions[:, 0], predictions[:, 1])
+print(confusion_matrix)
+confusion_matrix.to_dataframe().to_csv(
+    "results/parzen_matriz_confusao_complete_view.csv")
+# confusion_matrix.print_stats()
 print("")
 
 print("\tCOMPLETE VIEW: Precision by Class")
-precision_by_class = confusionMatrix.diagonal() / float(
+precision_by_class = confusion_matrix.to_dataframe().values.diagonal() / float(
     elementsByClass * repeticoes)
-print(precision_by_class)
+for index, classe in enumerate(nomeClasses):
+    print(classe, ' : %.5f' % (precision_by_class[index]))
 print("")
 
 print("\tCOMPLETE VIEW: precision average %s" % np.mean(precision_by_class))
@@ -65,16 +75,22 @@ predictions, error_rates, acuracias = executaParzen(
     elementsByClass)
 for indice, a in enumerate(acuracias):
     print(indice, ': %.5f' % (a))
+resultados['ParzenShapeView'] = acuracias
 
 print("\tSHAPE VIEW: Confusion Matrix ####################")
-confusionMatrix = calculateConfusionMatrix(predictions)
-print(np.array_str(confusionMatrix, precision=6, suppress_small=True))
+predictions = np.array(predictions)
+confusion_matrix = ConfusionMatrix(predictions[:, 0], predictions[:, 1])
+print(confusion_matrix)
+confusion_matrix.to_dataframe().to_csv(
+    "results/parzen_matriz_confusao_shape_view.csv")
+# confusion_matrix.print_stats()
 print("")
 
 print("\tSHAPE VIEW: Precision by Class")
-precision_by_class = confusionMatrix.diagonal() / float(
+precision_by_class = confusion_matrix.to_dataframe().values.diagonal() / float(
     elementsByClass * repeticoes)
-print(precision_by_class)
+for index, classe in enumerate(nomeClasses):
+    print(classe, ' : %.5f' % (precision_by_class[index]))
 print("")
 
 print("\tSHAPE VIEW: precision average %s" % np.mean(precision_by_class))
@@ -94,16 +110,22 @@ predictions, error_rates, acuracias = executaParzen(
     elementsByClass)
 for indice, a in enumerate(acuracias):
     print(indice, ': %.5f' % (a))
+resultados['ParzenRGBView'] = acuracias
 
 print("\tRGB VIEW: Confusion Matrix ####################")
-confusionMatrix = calculateConfusionMatrix(predictions)
-print(np.array_str(confusionMatrix, precision=6, suppress_small=True))
+predictions = np.array(predictions)
+confusion_matrix = ConfusionMatrix(predictions[:, 0], predictions[:, 1])
+print(confusion_matrix)
+confusion_matrix.to_dataframe().to_csv(
+    "results/parzen_matriz_confusao_rgb_view.csv")
+# confusion_matrix.print_stats()
 print("")
 
 print("\tRGB VIEW: Precision by Class")
-precision_by_class = confusionMatrix.diagonal() / float(
+precision_by_class = confusion_matrix.to_dataframe().values.diagonal() / float(
     elementsByClass * repeticoes)
-print(precision_by_class)
+for index, classe in enumerate(nomeClasses):
+    print(classe, ' : %.5f' % (precision_by_class[index]))
 print("")
 
 print("\tRGB VIEW: precision average %s" % np.mean(precision_by_class))
@@ -120,3 +142,5 @@ print("CompleteView : %.2f segundos" %
 print("ShapeView    : %.2f segundos" % (endShapeViewTime - startShapeViewTime))
 print("RGBView      : %.2f segundos" % (endRGBViewTime - startRGBViewTime))
 print("Total        : %.2f segundos" % (endTotalTime - startTotalTime))
+
+pd.DataFrame(resultados).to_csv("results/parzen_acuracias.csv")

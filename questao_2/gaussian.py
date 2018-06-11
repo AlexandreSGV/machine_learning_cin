@@ -68,9 +68,7 @@ def calcula_posteriori(xk, mi, sigma):
 
     return pi * determinante * exponencial
 
-# falta testar
-def predictGauss(elemento_teste, prioris, mis, sigmas):
-
+def posterioris_por_classe(elemento_teste, prioris, mis, sigmas):
     probabilidades = {}
     for classe in prioris:
         posteriori = calcula_posteriori(elemento_teste, mis[classe],
@@ -78,8 +76,16 @@ def predictGauss(elemento_teste, prioris, mis, sigmas):
         parte1 = posteriori * prioris[classe]
         parte2 = 0
         for r in mis.keys():
-            parte2 += calcula_posteriori(elemento_teste,mis[r],sigmas[r]) *  prioris[r]
+            parte2 += calcula_posteriori(elemento_teste, mis[r],
+                                         sigmas[r]) * prioris[r]
         probabilidades[classe] = parte1 / parte2
+
+    return probabilidades
+
+
+def predictGauss(elemento_teste, prioris, mis, sigmas):
+
+    probabilidades = posterioris_por_classe(elemento_teste, prioris, mis, sigmas)
 
     return max(probabilidades.keys(), key=(lambda k: probabilidades[k]))
 
@@ -128,9 +134,12 @@ def executaGaussiana(dados, gabarito, nomeClasses, repeticoes, splits):
 
             # usado para gerar matriz de confusao
             prediction = []
-            prediction.append(nomeClasses.tolist().index(classe_correta))
-            prediction.append(nomeClasses.tolist().index(predicted_class))
-            repetition_predictions.append(prediction)
+            # prediction.append(nomeClasses.tolist().index(classe_correta))
+            # prediction.append(nomeClasses.tolist().index(predicted_class))
+            prediction.append(classe_correta)
+            prediction.append(predicted_class)
+            predictions.append(prediction)
+            # repetition_predictions.append(prediction)
             if (predicted_class == classe_correta):
                 hits += 1
             else:
@@ -141,7 +150,7 @@ def executaGaussiana(dados, gabarito, nomeClasses, repeticoes, splits):
 
         error_rate = errors / (hits + errors)
         error_rates.append(error_rate)
-        predictions.append(repetition_predictions)
+        # predictions.append(repetition_predictions)
 
         for i in range(len(gabarito_conj_teste)):
             # print(gabarito_conj_teste[i], ' - ', estimativas[i], ' - ', gabarito_conj_teste[i] == estimativas[i])
