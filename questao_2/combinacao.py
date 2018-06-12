@@ -24,11 +24,6 @@ def predicaoCombinada(prioris, completeView_gauss_posteriors,
     for classe in prioris:
         soma[classe] = prioris[classe]*sub + completeView_gauss_posteriors[classe] + shapeView_gauss_posteriors[classe] + rgbView_gauss_posteriors[classe] + completeView_parzen_posteriors[classe] + shapeView_parzen_posteriors[classe] + rgbView_parzen_posteriors[classe]
 
-    # print('soma', soma)
-    # somatorio = 0
-    # for classe in soma:
-    # somatorio += soma[classe]
-    # print('somatorio', somatorio)
     return max(soma.keys(), key=(lambda k: soma[k]))
 
 

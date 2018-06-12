@@ -1,0 +1,41 @@
+
+######################
+MELHOR EXECUÇÃO :  49
+RERPESENTANTES DE CADA GRUPO
+	Protótipo  0  :  [ 126.94052095  194.45023933    0.            0.            2.37778755
+    2.46343869    2.86280377    3.4077307 ]
+	Protótipo  1  :  [  1.23715881e+02   1.38671565e+02   1.04462511e-02   1.19931879e-01
+   4.18988136e+00   1.41782845e+01   5.65364389e+00   2.20648627e+01]
+	Protótipo  2  :  [  1.39661119e+02   8.37755156e+01   0.00000000e+00   6.64407282e-02
+   2.25730130e+01   5.62808401e+02   2.72480096e+01   5.68166006e+02]
+	Protótipo  3  :  [ 147.55405567  136.33178543    0.            0.            4.54410601
+   24.70839014   12.22282222   65.15226633]
+	Protótipo  4  :  [  1.15429520e+02   1.33689939e+02   1.19749262e-01   0.00000000e+00
+   1.71354268e+00   1.56680774e+00   2.17089308e+00   1.96030722e+00]
+	Protótipo  5  :  [ 63.10894227  96.04948764   0.           0.           1.26249697
+   1.21428827   1.28385786   1.38930096]
+	Protótipo  6  :  [ 194.04749313   92.38258022    0.            0.            1.2477412
+    1.42213102    1.10466432    1.04240045]
+NUMERO DE OBJETOS DE CADA GRUPO
+	Grupo  0  :  443  elementos.
+	Grupo  1  :  74  elementos.
+	Grupo  2  :  10  elementos.
+	Grupo  3  :  87  elementos.
+	Grupo  4  :  255  elementos.
+	Grupo  5  :  653  elementos.
+	Grupo  6  :  576  elementos.
+VETOR DE HYPERPARAMETROS
+	Hyperparâmetro  0  :  7.69522085601e-08
+	Hyperparâmetro  1  :  1.25341092541e-07
+	Hyperparâmetro  2  :  1.36718650264
+	Hyperparâmetro  3  :  4.70340466164
+	Hyperparâmetro  4  :  5.10971199368e-05
+	Hyperparâmetro  5  :  4.38175507893e-07
+	Hyperparâmetro  6  :  5.66856427484e-05
+	Hyperparâmetro  7  :  1.93588863194e-07
+
+ÍNDICE DE RAND CORRIGIDO
+	Índice de Rand corrigido:  0.166189431293
+FUNÇÃO OBJETIVO
+	Funação Objetivo:  3.60814932084
+######################
