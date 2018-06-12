@@ -9,7 +9,7 @@ for column in df:
     res_mean, res_var, res_std = stats.bayes_mvs(df[column], alpha=0.95)
     print(column,res_mean)
 
-measurements = df.values
+measurements = np.asarray(df.values.T)
 test_stat, p_value = stats.friedmanchisquare(*measurements)
 print(p_value)
 

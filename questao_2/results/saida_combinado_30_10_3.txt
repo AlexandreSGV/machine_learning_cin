@@ -1,0 +1,358 @@
+completeView best bandwidth: 10
+shapeViewData best bandwidth: 10
+rgbView best bandwidth: 1.9952
+repetição 1
+repetição 2
+repetição 3
+repetição 4
+repetição 5
+repetição 6
+repetição 7
+repetição 8
+repetição 9
+repetição 10
+repetição 11
+repetição 12
+repetição 13
+repetição 14
+repetição 15
+repetição 16
+repetição 17
+repetição 18
+repetição 19
+repetição 20
+repetição 21
+repetição 22
+repetição 23
+repetição 24
+repetição 25
+repetição 26
+repetição 27
+repetição 28
+repetição 29
+repetição 30
+repetição 31
+repetição 32
+repetição 33
+repetição 34
+repetição 35
+repetição 36
+repetição 37
+repetição 38
+repetição 39
+repetição 40
+repetição 41
+repetição 42
+repetição 43
+repetição 44
+repetição 45
+repetição 46
+repetição 47
+repetição 48
+repetição 49
+repetição 50
+repetição 51
+repetição 52
+repetição 53
+repetição 54
+repetição 55
+repetição 56
+repetição 57
+repetição 58
+repetição 59
+repetição 60
+repetição 61
+repetição 62
+repetição 63
+repetição 64
+repetição 65
+repetição 66
+repetição 67
+repetição 68
+repetição 69
+repetição 70
+repetição 71
+repetição 72
+repetição 73
+repetição 74
+repetição 75
+repetição 76
+repetição 77
+repetição 78
+repetição 79
+repetição 80
+repetição 81
+repetição 82
+repetição 83
+repetição 84
+repetição 85
+repetição 86
+repetição 87
+repetição 88
+repetição 89
+repetição 90
+repetição 91
+repetição 92
+repetição 93
+repetição 94
+repetição 95
+repetição 96
+repetição 97
+repetição 98
+repetição 99
+repetição 100
+repetição 101
+repetição 102
+repetição 103
+repetição 104
+repetição 105
+repetição 106
+repetição 107
+repetição 108
+repetição 109
+repetição 110
+repetição 111
+repetição 112
+repetição 113
+repetição 114
+repetição 115
+repetição 116
+repetição 117
+repetição 118
+repetição 119
+repetição 120
+repetição 121
+repetição 122
+repetição 123
+repetição 124
+repetição 125
+repetição 126
+repetição 127
+repetição 128
+repetição 129
+repetição 130
+repetição 131
+repetição 132
+repetição 133
+repetição 134
+repetição 135
+repetição 136
+repetição 137
+repetição 138
+repetição 139
+repetição 140
+repetição 141
+repetição 142
+repetição 143
+repetição 144
+repetição 145
+repetição 146
+repetição 147
+repetição 148
+repetição 149
+repetição 150
+repetição 151
+repetição 152
+repetição 153
+repetição 154
+repetição 155
+repetição 156
+repetição 157
+repetição 158
+repetição 159
+repetição 160
+repetição 161
+repetição 162
+repetição 163
+repetição 164
+repetição 165
+repetição 166
+repetição 167
+repetição 168
+repetição 169
+repetição 170
+repetição 171
+repetição 172
+repetição 173
+repetição 174
+repetição 175
+repetição 176
+repetição 177
+repetição 178
+repetição 179
+repetição 180
+repetição 181
+repetição 182
+repetição 183
+repetição 184
+repetição 185
+repetição 186
+repetição 187
+repetição 188
+repetição 189
+repetição 190
+repetição 191
+repetição 192
+repetição 193
+repetição 194
+repetição 195
+repetição 196
+repetição 197
+repetição 198
+repetição 199
+repetição 200
+repetição 201
+repetição 202
+repetição 203
+repetição 204
+repetição 205
+repetição 206
+repetição 207
+repetição 208
+repetição 209
+repetição 210
+repetição 211
+repetição 212
+repetição 213
+repetição 214
+repetição 215
+repetição 216
+repetição 217
+repetição 218
+repetição 219
+repetição 220
+repetição 221
+repetição 222
+repetição 223
+repetição 224
+repetição 225
+repetição 226
+repetição 227
+repetição 228
+repetição 229
+repetição 230
+repetição 231
+repetição 232
+repetição 233
+repetição 234
+repetição 235
+repetição 236
+repetição 237
+repetição 238
+repetição 239
+repetição 240
+repetição 241
+repetição 242
+repetição 243
+repetição 244
+repetição 245
+repetição 246
+repetição 247
+repetição 248
+repetição 249
+repetição 250
+repetição 251
+repetição 252
+repetição 253
+repetição 254
+repetição 255
+repetição 256
+repetição 257
+repetição 258
+repetição 259
+repetição 260
+repetição 261
+repetição 262
+repetição 263
+repetição 264
+repetição 265
+repetição 266
+repetição 267
+repetição 268
+repetição 269
+repetição 270
+repetição 271
+repetição 272
+repetição 273
+repetição 274
+repetição 275
+repetição 276
+repetição 277
+repetição 278
+repetição 279
+repetição 280
+repetição 281
+repetição 282
+repetição 283
+repetição 284
+repetição 285
+repetição 286
+repetição 287
+repetição 288
+repetição 289
+repetição 290
+repetição 291
+repetição 292
+repetição 293
+repetição 294
+repetição 295
+repetição 296
+repetição 297
+repetição 298
+repetição 299
+repetição 300
+0 : 0.91476
+1 : 0.91905
+2 : 0.92000
+3 : 0.91762
+4 : 0.91905
+5 : 0.91381
+6 : 0.91762
+7 : 0.91476
+8 : 0.91571
+9 : 0.91714
+10 : 0.91762
+11 : 0.91571
+12 : 0.91857
+13 : 0.91857
+14 : 0.91762
+15 : 0.91619
+16 : 0.91714
+17 : 0.91667
+18 : 0.91714
+19 : 0.91762
+20 : 0.91524
+21 : 0.92000
+22 : 0.91429
+23 : 0.91667
+24 : 0.91571
+25 : 0.91905
+26 : 0.91619
+27 : 0.91619
+28 : 0.91857
+29 : 0.91571
+	COMBINADO: Confusion Matrix ####################
+Predicted  BRICKFACE  CEMENT  FOLIAGE  GRASS  PATH   SKY  WINDOW  __all__
+Actual                                                                   
+BRICKFACE       8906      18        4      0     0     0      72     9000
+CEMENT           406    8051      165     14   148     0     216     9000
+FOLIAGE           97     175     7950      0     0     0     778     9000
+GRASS              0       0        0   8997     0     0       3     9000
+PATH               0      87        0      0  8913     0       0     9000
+SKY                0       0        0      0     0  9000       0     9000
+WINDOW           752     760     1534      0     0     0    5954     9000
+__all__        10161    9091     9653   9011  9061  9000    7023    63000
+
+	COMBINADO: Precision by Class
+BRICKFACE  : 0.98956
+CEMENT  : 0.89456
+FOLIAGE  : 0.88333
+GRASS  : 0.99967
+PATH  : 0.99033
+SKY  : 1.00000
+WINDOW  : 0.66156
+
+	COMPLETE VIEW: precision average 0.917
+	COMPLETE VIEW: error rate average 0.083
+
+Total        : 2086.99 segundos
