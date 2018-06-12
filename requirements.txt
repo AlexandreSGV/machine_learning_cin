@@ -3,3 +3,4 @@ pandas
 matplotlib
 pandas_ml
 sklearn
+orange

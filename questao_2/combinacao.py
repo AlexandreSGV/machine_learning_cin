@@ -68,9 +68,11 @@ rskf = RepeatedStratifiedKFold(
     n_splits=splits, n_repeats=repeticoes, random_state=123456789)
 #skf = StratifiedKFold(n_splits=10, random_state=42)
 '''FIXED BANDWIDTHS'''
-completeView_h = 10
-shapeView_h = 10
+completeView_h = 1.9952
+shapeView_h = 2.3865
 rgbView_h = 1.9952
+# 4.084238652674522
+
 
 print("completeView best bandwidth: {0}".format(completeView_h))
 print("shapeViewData best bandwidth: {0}".format(shapeView_h))
@@ -83,6 +85,10 @@ acuracias = []
 
 error_rates = []
 predictions = []
+
+
+
+
 for indices_treinamento, indices_teste in rskf.split(completeViewData, gabarito):
     cont+=1
     print('repetição', cont)
@@ -113,7 +119,7 @@ for indices_treinamento, indices_teste in rskf.split(completeViewData, gabarito)
     # train_sample_size = conj_treinamentoCompleteView.shape[0]
     # test_sample_size = completeView_test_set.shape[0]
     # train_class_size = train_sample_size / numberOfClasses
-    '''UNCOMMENT FOR NEW BANDWIDTH ESTIMATIONS'''
+    '''DESCOMENTE PARA RECALCULAR OS VALORES DE H'''
 
     # completeView_h = parzen.estimador_bandwidth(
     #     completeViewData[indices_treinamento])
