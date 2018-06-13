@@ -5,7 +5,10 @@ import time
 
 dados = pd.read_csv('data/segmentation_18_col.csv', sep=',')
 # X = dados.iloc[:, 1:].values # conjunto de dados
-df = dados.iloc[:, 1:]
+# df = dados.iloc[:, 1:] #CompleteView
+# df = dados.iloc[:, 1:9] #ShapeView
+df = dados.iloc[:, 9:19] #RGBView
+
 # df = df.drop(df.columns[10], axis=1)
 # df = df.drop(df.columns[10], axis=1)
 # df = df.drop(df.columns[10], axis=1)
@@ -23,7 +26,7 @@ melhor_prototipos = []
 melhor_clusters = []
 melhor_execucoes = 0
 melhor_quantidades = []
-for execucoes in range(2):
+for execucoes in range(100):
 
     gama = code.calcular_gama(X)
     hiperparametros = code.iniciar_hiperparametros(X, gama)
@@ -33,10 +36,10 @@ for execucoes in range(2):
     clusters = code.iniciar_afetacao_objeto(c, X, prototipos, hiperparametros)
     rodadas = 0
     quantidades = []
-    teste = 99999
+    teste = 9999999
 
     start_total_time = time.time()
-    while (teste > 300):
+    while (teste > 0):
         # step 1
         prototipos = code.calcular_representantes_clusters(X, clusters, prototipos, hiperparametros)
         # step 2

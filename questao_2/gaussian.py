@@ -48,7 +48,7 @@ def estimar_parametros(conj_treinamento):
 def calcula_posteriori(xk, mi, sigma):
     d = mi.shape[0]
     pi = ((2 * np.pi)**(-d/2))
-    determinante =  (np.linalg.det( np.linalg.pinv(sigma)) ** 0.5)
+    determinante =  (np.linalg.det( np.linalg.inv(sigma)) ** 0.5)
     xk = xk.reshape(1,len(xk))
     mi = mi.reshape(1,len(mi))
 
@@ -124,7 +124,7 @@ def executaGaussiana(dados, gabarito, nomeClasses, repeticoes, splits):
         estimativas = []
         errors = 0
         hits = 0
-        repetition_predictions = []
+        
         for indice, elemento_teste in enumerate(conj_teste):
 
 
