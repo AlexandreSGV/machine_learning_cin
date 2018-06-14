@@ -160,7 +160,5 @@ def indice_rand(X,Y, v_clusters):
     for j in range(len(Y)):
         for h in range(len(Y[j])):
             labels_true.append(Y[j][h])
-    
-    # print(labels_pred)
-    # print(labels_true)
+
     return adjusted_rand_score(labels_true, labels_pred)

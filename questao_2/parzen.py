@@ -6,7 +6,7 @@ from sklearn.model_selection import RepeatedStratifiedKFold
 
 
 def estimador_bandwidth(data):
-    params = {'bandwidth': np.logspace(0.3, 1, 10)}
+    params = {'bandwidth': np.logspace(0.1, 1, 10)}
     grid = GridSearchCV(KernelDensity(), params, cv=10)
     grid.fit(data)
     return grid.best_estimator_.bandwidth
@@ -112,7 +112,6 @@ def executaParzen(dados, gabarito, nomeClasses, repeticoes, splits,
 
         errors = 0
         hits = 0
-        repetition_predictions = []
         estimativas = []
         # para cada elemento do treinamento, calcula a densidade
         for indice, elemento_teste in enumerate(conj_teste):

@@ -5,6 +5,7 @@ import time
 
 dados = pd.read_csv('data/segmentation_18_col.csv', sep=',')
 # X = dados.iloc[:, 1:].values # conjunto de dados
+
 # df = dados.iloc[:, 1:] #CompleteView
 # df = dados.iloc[:, 1:9] #ShapeView
 df = dados.iloc[:, 9:19] #RGBView
